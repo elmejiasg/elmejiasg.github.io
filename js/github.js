@@ -65,7 +65,7 @@ const defaultBanners = [
 
 export async function renderProjects(repos, lang = "es") {
   const projectContainer = document.querySelector(".row");
-  projectContainer.innerHTML = ""; // limpia antes de añadir
+  projectContainer.innerHTML = "";
 
   for (const repo of repos) {
     const config = await fetchRepoConfig(repo);
