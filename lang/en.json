@@ -1,0 +1,9 @@
+{
+  "name": "User",
+  "mail": "user@example.com",
+  "projects": "Projects",
+  "projectTitle1": "Calculadora JS",
+  "projectDascription1": "Calculadora sencilla. Perfecta para usar como base.",
+  "profilePicAlt": "Profile picture",
+  "projectPicAlt": "Project picture"
+}
