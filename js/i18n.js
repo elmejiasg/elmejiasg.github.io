@@ -49,7 +49,7 @@ export function initLanguageSelector() {
       await updateLanguage(lang);
 
       // Clear current project list before re-rendering
-      const projectContainer = document.querySelector(".row");
+      const projectContainer = document.querySelector(".projects-container");
       projectContainer.innerHTML = "";
 
       const githubUsername = "elmejiasg";

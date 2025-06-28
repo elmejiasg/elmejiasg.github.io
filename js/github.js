@@ -28,7 +28,7 @@ export async function getGitHubRepos(username) {
 
 // Display a warning if the rate limit is reached
 function showRateLimitMessage() {
-  const container = document.querySelector(".row");
+  const container = document.querySelector(".projects-container");
   container.innerHTML = `
     <div class="alert alert-warning w-100 text-center" role="alert">
       <i class="fa-solid fa-triangle-exclamation me-2"></i>
@@ -60,7 +60,7 @@ const defaultBanners = [
 ];
 
 export async function renderProjects(repos, lang = "es") {
-  const projectContainer = document.querySelector(".row");
+  const projectContainer = document.querySelector(".projects-container");
   projectContainer.innerHTML = "";
 
   for (const repo of repos) {
