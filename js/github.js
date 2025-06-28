@@ -4,12 +4,17 @@ export async function getGitHubRepos(username) {
     const res = await fetch(`https://api.github.com/users/${username}/repos`);
     if (!res.ok) throw new Error("No se pudieron obtener los repositorios");
     const all = await res.json();
-    return all.filter(repo => !repo.fork && !repo.private);
+
+    // Excluir forks, privados y tu portfolio page
+    return all.filter(
+      repo => !repo.fork && !repo.private && repo.name !== `${username.toLowerCase()}.github.io`
+    );
   } catch (error) {
     console.error("Error al cargar los repositorios:", error);
     return [];
   }
 }
+
 
 // 2. Obtener portfolio.config.json de cada repo (si existe)
 async function fetchRepoConfig(repo) {
