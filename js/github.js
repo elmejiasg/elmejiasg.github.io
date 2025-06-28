@@ -26,11 +26,11 @@ async function fetchRepoConfig(repo) {
 
 
 const defaultBanners = [
-  "../assets/banners/banner1.png",
-  "../assets/banners/banner2.png",
-  "../assets/banners/banner3.png",
-  "../assets/banners/banner4.png",
-  "../assets/banners/banner5.png"
+  "../assets/img/banners/banner1.png",
+  "../assets/img/banners/banner2.png",
+  "../assets/img/banners/banner3.png",
+  "../assets/img/banners/banner4.png",
+  "../assets/img/banners/banner5.png"
 ];
 
 export async function renderProjects(repos, lang = "es") {
