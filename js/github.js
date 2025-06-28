@@ -2,6 +2,13 @@
 export async function getGitHubRepos(username) {
   try {
     const res = await fetch(`https://api.github.com/users/${username}/repos`);
+
+    // Si se supera el límite de peticiones (rate limit), mostrar aviso
+    if (res.status === 403) {
+      showRateLimitMessage();
+      throw new Error("Límite de llamadas alcanzado");
+    }
+
     if (!res.ok) throw new Error("No se pudieron obtener los repositorios");
     const all = await res.json();
 
@@ -15,6 +22,17 @@ export async function getGitHubRepos(username) {
   }
 }
 
+// Mostrar un mensaje de error por límite de llamadas
+function showRateLimitMessage() {
+  const container = document.querySelector(".row");
+  container.innerHTML = `
+    <div class="alert alert-warning w-100 text-center" role="alert">
+      <i class="fa-solid fa-triangle-exclamation me-2"></i>
+      Has alcanzado el <strong>límite de peticiones a la API de GitHub</strong>.
+      Intenta recargar más tarde o volver en unos minutos.
+    </div>
+  `;
+}
 
 // 2. Obtener portfolio.config.json de cada repo (si existe)
 async function fetchRepoConfig(repo) {
