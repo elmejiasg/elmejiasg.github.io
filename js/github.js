@@ -24,45 +24,13 @@ async function fetchRepoConfig(repo) {
   }
 }
 
-// // 3. Mostrar proyectos en el portfolio
-// export async function renderProjects(repos, lang = "es") {
-//   const projectContainer = document.querySelector(".row");
 
-//   for (const repo of repos) {
-//     const config = await fetchRepoConfig(repo);
-
-//     // Obtener lenguajes
-//     const langRes = await fetch(repo.languages_url);
-//     const languagesData = await langRes.json();
-//     const languages = Object.keys(languagesData).join(" | ") || "Sin lenguajes";
-
-//     // Usar config si existe, si no usar los datos por defecto
-//     const title = config?.title?.[lang] || repo.name;
-//     const description = config?.description?.[lang] || repo.description || "Sin descripción.";
-//     const tags = config?.tags?.join(" | ") || languages;
-
-//     const col = document.createElement("div");
-//     col.classList.add("col");
-//     col.innerHTML = `
-//       <a href="${repo.html_url}" target="_blank" class="card-link text-decoration-none text-dark">
-//         <div class="card h-100 shadow-sm">
-//           <div class="card-body d-flex flex-column">
-//             <h5 class="card-title fw-bold mb-3">${title}</h5>
-//             <p class="card-text flex-grow-1">${description}</p>
-//             <p class="tech">${tags}</p>
-//           </div>
-//         </div>
-//       </a>
-//     `;
-//     projectContainer.appendChild(col);
-//   }
-// }
 const defaultBanners = [
-  "assets/banners/banner1.png",
-  "assets/banners/banner2.png",
-  "assets/banners/banner3.png",
-  "assets/banners/banner4.png",
-  "assets/banners/banner5.png"
+  "../assets/banners/banner1.png",
+  "../assets/banners/banner2.png",
+  "../assets/banners/banner3.png",
+  "../assets/banners/banner4.png",
+  "../assets/banners/banner5.png"
 ];
 
 export async function renderProjects(repos, lang = "es") {
