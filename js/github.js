@@ -1,53 +1,56 @@
-// 1. Obtener repos públicos desde GitHub
+// Fetch Public GitHub Repos
 export async function getGitHubRepos(username) {
   try {
     const res = await fetch(`https://api.github.com/users/${username}/repos`);
 
-    // Si se supera el límite de peticiones (rate limit), mostrar aviso
+    // Handle GitHub API rate limiting
     if (res.status === 403) {
       showRateLimitMessage();
-      throw new Error("Límite de llamadas alcanzado");
+      throw new Error("Rate limit exceeded. Please try again later.");
     }
 
-    if (!res.ok) throw new Error("No se pudieron obtener los repositorios");
+    if (!res.ok) throw new Error("Failed to load repositories.");
+
     const all = await res.json();
 
-    // Excluir forks, privados y tu portfolio page
+    // Filter out forks, private repos, and the GitHub Pages repo
     return all.filter(
-      repo => !repo.fork && !repo.private && repo.name !== `${username.toLowerCase()}.github.io`
+      repo =>
+        !repo.fork &&
+        !repo.private &&
+        repo.name !== `${username.toLowerCase()}.github.io`
     );
   } catch (error) {
-    console.error("Error al cargar los repositorios:", error);
+    console.error("Error loading repositories:", error);
     return [];
   }
 }
 
-// Mostrar un mensaje de error por límite de llamadas
+// Display a warning if the rate limit is reached
 function showRateLimitMessage() {
   const container = document.querySelector(".row");
   container.innerHTML = `
     <div class="alert alert-warning w-100 text-center" role="alert">
       <i class="fa-solid fa-triangle-exclamation me-2"></i>
-      Has alcanzado el <strong>límite de peticiones a la API de GitHub</strong>.
-      Intenta recargar más tarde o volver en unos minutos.
+      <strong>Rate limit exceeded</strong>. Please try again later.
     </div>
   `;
 }
 
-// 2. Obtener portfolio.config.json de cada repo (si existe)
+// Load custom project config (if available)
 async function fetchRepoConfig(repo) {
   const configUrl = `https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/main/portfolio.config.json`;
 
   try {
     const res = await fetch(configUrl);
-    if (!res.ok) throw new Error("No existe config");
+    if (!res.ok) throw new Error("No config found");
     return await res.json();
-  } catch (err) {
+  } catch {
     return null;
   }
 }
 
-
+// Render Projects from Repos
 const defaultBanners = [
   "../assets/img/banners/banner1.png",
   "../assets/img/banners/banner2.png",
@@ -63,17 +66,17 @@ export async function renderProjects(repos, lang = "es") {
   for (const repo of repos) {
     const config = await fetchRepoConfig(repo);
 
-    // Obtener lenguajes
+    // Load list of languages used in the repository
     const langRes = await fetch(repo.languages_url);
     const languagesData = await langRes.json();
-    const languages = Object.keys(languagesData).join(" | ") || "Sin lenguajes";
+    const languages = Object.keys(languagesData).join(" | ") || "No languages listed";
 
-    // Títulos y descripción por idioma
+    // Internationalized title and description
     const title = config?.title?.[lang] || repo.name;
-    const description = config?.description?.[lang] || repo.description || "Sin descripción.";
+    const description = config?.description?.[lang] || repo.description || "No description provided.";
     const tags = config?.tags?.join(" | ") || languages;
 
-    // Banner: si config tiene banner, usarla; sino uno aleatorio
+    // Banner image
     const banner = config?.banner || defaultBanners[Math.floor(Math.random() * defaultBanners.length)];
 
     const col = document.createElement("div");

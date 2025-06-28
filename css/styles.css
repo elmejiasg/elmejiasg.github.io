@@ -1,27 +1,28 @@
 /* ============================
-   VARIABLES DE TEMA
+   THEME VARIABLES
 ============================ */
 
-/* Tema claro (por defecto) */
+/* Light theme (default) */
 :root {
     --bg-color: #ffffff;
     --text-color: #000000;
     --card-bg: #f8f9fa;
-    --acent-color: #003b3a;
+    --accent-color: #003b3a;
     --icon-color: #003b3a;
 }
 
-/* Tema oscuro */
+/* Dark theme */
 [data-theme="dark"] {
     --bg-color: #000707;
     --text-color: #f1f1f1;
     --card-bg: #131a1a;
-    --acent-color: #7fa99b;
+    --accent-color: #7fa99b;
     --icon-color: #ffffff;
 }
 
+
 /* ============================
-   ESTILOS GENERALES
+   GLOBAL STYLES
 ============================ */
 
 body {
@@ -30,6 +31,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
 }
+
 
 /* ============================
    SIDEBAR
@@ -59,8 +61,9 @@ body {
     background-image: url("../assets/img/bgDark.png");
 }
 
+
 /* ============================
-   CONTENIDO PRINCIPAL
+   MAIN CONTENT
 ============================ */
 
 .main-content {
@@ -74,11 +77,12 @@ body {
 .t1 {
     font-weight: bold;
     font-size: 3rem;
-    color: var(--acent-color);
+    color: var(--accent-color);
 }
 
+
 /* ============================
-   COMPONENTES
+   COMPONENTS
 ============================ */
 
 .profile-img {
@@ -109,11 +113,12 @@ body {
 
 .tech {
     font-weight: bold;
-    color: var(--acent-color);
+    color: var(--accent-color);
 }
 
+
 /* ============================
-   SWITCH DE TEMA
+   THEME TOGGLE SWITCH
 ============================ */
 
 .form-check-input {
@@ -123,8 +128,7 @@ body {
 }
 
 .form-check-input::after {
-    content: "\f186";
-    /* Moon */
+    content: "\f186"; /* Moon icon */
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     color: var(--icon-color);
@@ -134,12 +138,10 @@ body {
     transform: translateY(-50%);
     transition: all 0.3s ease;
     font-size: 0.9rem;
-    box-shadow: #003b3a, 0.7;
 }
 
 .form-check-input:checked::after {
-    content: "\f185";
-    /* Sun */
+    content: "\f185"; /* Sun icon */
     text-shadow: 0 0 3px rgba(0, 39, 23, 0.8);
     left: 1.2rem;
 }
@@ -148,22 +150,22 @@ body {
     box-shadow: 0 0 0 0.25rem rgba(0, 86, 76, 0.25) !important;
 }
 
-/* Toggle personalizado en modo claro */
+/* Custom toggle appearance - light theme */
 [data-theme="light"] .form-check-input {
-    border-color: var(--acent-color);
+    border-color: var(--accent-color);
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2328a745'/%3e%3c/svg%3e");
 }
 
-/* Toggle personalizado en modo oscuro */
+/* Custom toggle appearance - dark theme */
 [data-theme="dark"] .form-check-input {
-    background-color: var(--acent-color);
-    border-color: var(--acent-color);
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ffffff'/%3e%3c/svg%3e");
 }
 
 
 /* ============================
-   RESPONSIVE
+   RESPONSIVE DESIGN
 ============================ */
 
 @media (max-width: 768px) {

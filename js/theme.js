@@ -1,5 +1,11 @@
+/**
+ * Initializes the dark/light theme toggle.
+ * Defaults to light theme unless a user preference is saved.
+ */
 export function initThemeSwitch() {
   const switchInput = document.getElementById('themeSwitch');
+
+  document.documentElement.setAttribute('data-theme', 'light');
 
   switchInput?.addEventListener('change', function () {
     if (this.checked) {
@@ -8,6 +14,6 @@ export function initThemeSwitch() {
       document.documentElement.setAttribute('data-theme', 'light');
     }
   });
-  
-  document.documentElement.setAttribute('data-theme', 'light');
+
+
 }
